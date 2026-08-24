@@ -1,6 +1,6 @@
 {
-  "buildCommand": null,
-  "installCommand": null,
+  "buildCommand": "",
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/", "destination": "/invitation.html" }
   ]
