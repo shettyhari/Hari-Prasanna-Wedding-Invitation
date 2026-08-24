@@ -20,6 +20,8 @@
     --gold-line: #C9A24B;
     --ink: #2E1B14;
     --ink-soft: #6B5646;
+    --rose: #E3AEB0;
+    --rose-deep: #CE8A8E;
   }
 
   *{ box-sizing: border-box; }
@@ -98,40 +100,91 @@
   .reveal.in{ opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
-  /* ---------- nav ---------- */
+  /* ---------- nav (burgundy background removed entirely — cream, matching the page) ---------- */
   .nav{
     position: sticky; top:0; z-index: 30;
     display:flex; align-items:center; justify-content:space-between;
     gap: 16px;
-    padding: 14px 22px;
-    background: var(--noir);
-    border-bottom: 1px solid rgba(184,134,58,0.5);
+    padding: 10px 20px;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(184,134,58,0.35);
   }
-  .nav-brand{ display:flex; align-items:center; gap:10px; }
-  .nav-brand svg{ width:26px; height:26px; color:var(--gold-soft); flex:none; animation: heartbeat 3.4s ease-in-out infinite; transform-origin:center; }
-  .nav-brand .fam{
-    font-family:'Playfair Display', serif; font-weight:700;
-    color: var(--paper); font-size: 1.02rem; line-height:1.15;
+
+  /* ---------- brand monogram (real vector type, not a pasted image) ---------- */
+  .brand-mark-wrap{
+    --mark: 128px;
+    flex:none; position:relative;
+    width: calc(var(--mark) * 1.3); height: var(--mark);
   }
-  .nav-brand .kind{
-    font-family:'Poppins', sans-serif; font-weight:500;
-    color: var(--gold-soft); font-size: 0.58rem;
-    letter-spacing: 0.2em; text-transform:uppercase;
+  .mark-lotus{
+    position:absolute; left:0; bottom: calc(var(--mark) * -0.02);
+    width: calc(var(--mark) * 0.5); height: calc(var(--mark) * 0.5);
+    color: var(--gold); z-index:2; pointer-events:none;
   }
-  .nav-links{
-    display:flex; align-items:center; gap: 18px;
-    list-style:none; margin:0; padding:0;
-    overflow-x:auto; scrollbar-width:none;
+  .brand-mark{
+    position:absolute; right:0; top:0;
+    width: var(--mark); height: var(--mark);
+    border-radius:50%;
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 0 3px var(--cream), 0 0 0 4px var(--gold-line);
+    background: radial-gradient(circle at 50% 38%, rgba(184,134,58,0.08), transparent 65%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap: calc(var(--mark) * 0.01);
+    padding: calc(var(--mark) * 0.05) calc(var(--mark) * 0.13);
+    z-index:1;
   }
-  .nav-links::-webkit-scrollbar{ display:none; }
-  .nav-links a{
-    font-family:'Poppins', sans-serif; font-weight:500;
-    font-size: 0.66rem; letter-spacing: 0.14em; text-transform:uppercase;
-    color: #EFDFC8; text-decoration:none; white-space:nowrap;
-    padding-bottom: 4px; border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
+  .ring-dot{
+    position:absolute; width: calc(var(--mark) * 0.028); height: calc(var(--mark) * 0.028);
+    border-radius:50%; background: var(--gold); transform:translate(-50%,-50%);
   }
-  .nav-links a:hover, .nav-links a.active{ color: var(--gold-soft); border-color: var(--gold); }
+
+  .mark-ornament{ position:relative; width: calc(var(--mark) * 0.16); height: calc(var(--mark) * 0.16); color: var(--gold); }
+  .mark-ornament svg{ width:100%; height:100%; }
+
+  .mark-monogram{ position:relative; height: calc(var(--mark) * 0.3); width:100%; }
+  .mark-k, .mark-p{
+    position:absolute; top:50%;
+    font-family:'Playfair Display', serif; font-weight:900;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold) 55%, var(--gold-line));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-size: calc(var(--mark) * 0.3); line-height:1;
+  }
+  .mark-k{ left: 26%; transform: translate(-50%,-55%); }
+  .mark-p{ right: 26%; transform: translate(50%,-55%); }
+  .mark-weds-script{
+    position:absolute; left:50%; top:66%; transform: translate(-50%,-50%);
+    font-family:'Great Vibes', cursive; color: var(--maroon-deep);
+    font-size: calc(var(--mark) * 0.13); white-space:nowrap; line-height:1;
+  }
+  .mark-weds-script::before{
+    content:"\2661"; position:absolute; left:50%; top:-72%; transform:translateX(-50%);
+    font-size: calc(var(--mark) * 0.06); color: var(--maroon-deep); line-height:1;
+  }
+
+  .mark-names{
+    font-family:'Playfair Display', serif; font-weight:700; color: var(--maroon-deep);
+    font-size: calc(var(--mark) * 0.062); letter-spacing: 0.06em; text-transform:uppercase;
+    text-align:center; line-height:1.2; margin: 0;
+  }
+  .mark-names .weds{
+    display:flex; align-items:center; justify-content:center; gap: calc(var(--mark) * 0.02);
+    font-family:'Great Vibes', cursive; font-weight:400; color: var(--gold);
+    text-transform:none; letter-spacing:0; font-size: calc(var(--mark) * 0.1); line-height:1.3;
+  }
+  .mark-names .weds .dash{ width: calc(var(--mark) * 0.045); height:1px; background: var(--gold-line); }
+
+  .mark-divider{ display:flex; align-items:center; gap: calc(var(--mark) * 0.02); color: var(--gold); line-height:1; }
+  .mark-divider .line{ width: calc(var(--mark) * 0.06); height:1px; background: var(--gold-line); }
+  .mark-divider svg{ width: calc(var(--mark) * 0.06); height: calc(var(--mark) * 0.06); }
+
+  .mark-tagline{
+    display:flex; align-items:center; gap: calc(var(--mark) * 0.025);
+    font-family:'Cinzel', serif; font-weight:600; color: var(--gold);
+    font-size: calc(var(--mark) * 0.042); letter-spacing: 0.09em; text-transform:uppercase;
+    line-height:1; white-space:nowrap;
+  }
+  .mark-tagline .dot{ width: calc(var(--mark) * 0.014); height: calc(var(--mark) * 0.014); border-radius:50%; background:currentColor; }
+  .mark-heart{ color: var(--maroon-deep); font-size: calc(var(--mark) * 0.048); line-height:1; }
 
   .music-toggle{
     flex:none; width:30px; height:30px; border-radius:50%;
@@ -152,8 +205,8 @@
   .lang-toggle button.active{ background:var(--gold); color:var(--maroon-black); }
 
   .lang-toggle.on-cream{ border-color:var(--gold); }
-  .lang-toggle.on-cream button{ color:var(--maroon-deep); }
-  .lang-toggle.on-cream button.active{ background:var(--gold); color:var(--paper); }
+  .lang-toggle.on-cream button{ background:transparent !important; color:var(--maroon-deep) !important; }
+  .lang-toggle.on-cream button.active{ background:var(--gold) !important; color:var(--paper) !important; }
 
   /* ---------- decorative ---------- */
   .flourish{
@@ -507,7 +560,7 @@
   .foot-flourish{ margin-top: 30px; color: var(--gold); opacity:0.8; }
   .foot-flourish svg{ width:26px; height:26px; animation: heartbeat 3.4s ease-in-out infinite; transform-origin:center; }
 
-  @media (min-width: 700px){ .nav-brand .kind{ font-size:0.62rem; } }
+  @media (min-width: 700px){ .brand-mark-wrap{ --mark: 148px; } }
 
   /* Telugu script needs its own face — the Latin display fonts above have no Telugu glyphs.
      !important is deliberate: this must win over every component's own font-family, regardless
@@ -642,6 +695,27 @@
     <path d="M2 20 C 2 24, 6 24, 6 20" stroke-width="0.7" opacity="0.7"/>
     <circle cx="18" cy="2" r="1.4" fill="currentColor" stroke="none"/>
   </symbol>
+  <symbol id="mark-crown" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+    <path d="M20 2 L23 12 L20 18 L17 12 Z" fill="currentColor" stroke="none"/>
+    <circle cx="6" cy="20" r="2" fill="currentColor" stroke="none"/>
+    <circle cx="34" cy="20" r="2" fill="currentColor" stroke="none"/>
+    <path d="M9 20 C 14 16, 18 16, 20 12" stroke-width="1.2"/>
+    <path d="M31 20 C 26 16, 22 16, 20 12" stroke-width="1.2"/>
+  </symbol>
+  <symbol id="lotus-motif" viewBox="0 0 100 100">
+    <path d="M72 14 C 54 26, 42 46, 38 74" fill="none" stroke="var(--gold-line)" stroke-width="2"/>
+    <path d="M64 24 C 57 17, 47 18, 43 26 C 50 30, 59 30, 64 24 Z" fill="var(--gold)"/>
+    <path d="M53 42 C 45 36, 35 38, 31 47 C 39 51, 49 49, 53 42 Z" fill="var(--gold)"/>
+    <path d="M44 61 C 35 57, 26 60, 23 69 C 32 72, 41 69, 44 61 Z" fill="var(--gold)"/>
+    <g transform="translate(30,80)">
+      <path d="M0 4 C -13 -2, -18 -16, -9 -25 C -3 -15, 1 -5, 0 4 Z" fill="var(--rose)"/>
+      <path d="M0 4 C 9 -6, 21 -7, 26 4 C 17 9, 6 9, 0 4 Z" fill="var(--rose-deep)"/>
+      <path d="M0 4 C -7 11, -19 13, -25 5 C -15 -2, -5 -2, 0 4 Z" fill="var(--rose)" opacity="0.92"/>
+      <path d="M0 4 C 5 13, 15 18, 24 13 C 17 6, 7 0, 0 4 Z" fill="var(--rose-deep)" opacity="0.9"/>
+      <path d="M0 4 C -4 15, -3 25, 6 29 C 9 19, 7 9, 0 4 Z" fill="var(--rose)" opacity="0.85"/>
+      <circle cx="0" cy="2" r="4" fill="var(--gold)"/>
+    </g>
+  </symbol>
 </svg>
 
 <div class="gate" id="gate" role="dialog" aria-label="Wedding invitation opener">
@@ -715,20 +789,41 @@
 </div>
 
 <nav class="nav">
-  <div class="nav-brand">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg>
-    <span>
-      <span class="fam" style="display:block;" data-i18n="brand.kicker">Shetty&rsquo;s Family</span>
-      <span class="kind" style="display:block;" data-i18n="nav.kind">Wedding Invitation</span>
-    </span>
+  <div class="brand-mark-wrap">
+    <svg class="mark-lotus" viewBox="0 0 100 100"><use href="#lotus-motif"/></svg>
+    <div class="brand-mark" role="img" aria-label="Krishna weds Prasanna, Together Forever">
+      <span class="ring-dot" style="left:73%; top:10.2%;"></span>
+      <span class="ring-dot" style="left:96%; top:50%;"></span>
+      <span class="ring-dot" style="left:73%; top:89.8%;"></span>
+      <span class="ring-dot" style="left:27%; top:89.8%;"></span>
+      <span class="ring-dot" style="left:4%; top:50%;"></span>
+      <span class="ring-dot" style="left:27%; top:10.2%;"></span>
+
+      <div class="mark-ornament"><svg viewBox="0 0 40 40"><use href="#mark-crown"/></svg></div>
+
+      <div class="mark-monogram">
+        <span class="mark-k">K</span>
+        <span class="mark-weds-script">weds</span>
+        <span class="mark-p">P</span>
+      </div>
+
+      <p class="mark-names">
+        Krishna
+        <span class="weds"><span class="dash"></span>weds<span class="dash"></span></span>
+        Prasanna
+      </p>
+
+      <div class="mark-divider">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="6" r="3.4"/><circle cx="12" cy="18" r="3.4"/><circle cx="6" cy="12" r="3.4"/><circle cx="18" cy="12" r="3.4"/></svg>
+        <span class="line"></span>
+      </div>
+
+      <p class="mark-tagline"><span class="dot"></span>Together Forever<span class="dot"></span></p>
+      <span class="mark-heart">&hearts;</span>
+    </div>
   </div>
-  <ul class="nav-links">
-    <li><a href="#top" class="active" data-i18n="nav.home">Home</a></li>
-    <li><a href="#families" data-i18n="nav.family">Our Family</a></li>
-    <li><a href="#events" data-i18n="nav.events">Events</a></li>
-    <li><a href="#rsvp" data-i18n="nav.rsvp">RSVP</a></li>
-  </ul>
-  <div class="lang-toggle" data-lang-toggle>
+  <div class="lang-toggle on-cream" data-lang-toggle>
     <button type="button" data-lang-btn="en">EN</button>
     <button type="button" data-lang-btn="te">తె</button>
   </div>
@@ -1439,22 +1534,6 @@
       entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
     els.forEach(el => io.observe(el));
-  })();
-
-  (function initNav(){
-    const links = document.querySelectorAll(".nav-links a");
-    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
-    if (!("IntersectionObserver" in window) || !sections.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting){
-          links.forEach(a => a.classList.remove("active"));
-          const match = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-          if (match) match.classList.add("active");
-        }
-      });
-    }, { rootMargin: "-45% 0px -45% 0px" });
-    sections.forEach(s => io.observe(s));
   })();
 
   (function initRsvp(){
