@@ -90,101 +90,96 @@
   .wrap{ max-width: 720px; margin: 0 auto; padding: 0 22px; position:relative; }
   .wrap-narrow{ max-width: 560px; margin: 0 auto; padding: 0 22px; position:relative; }
 
-  section{ position:relative; }
+  section{ position:relative; z-index:2; }
   .band-cream{ background: var(--cream); }
   .band-blush{ background: var(--blush); }
   .band-white{ background: var(--paper); }
+
+  /* ================= watermark monogram (real vector component, fixed behind every section) ================= */
+  .watermark{
+    --wm: clamp(300px, 46vw, 560px);
+    position: fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    width: var(--wm); height: var(--wm);
+    z-index: 1; pointer-events:none;
+    opacity: 0.09;
+  }
+  .wm-lotus{
+    position:absolute; left: calc(var(--wm) * -0.06); bottom: calc(var(--wm) * -0.01);
+    width: calc(var(--wm) * 0.5); height: calc(var(--wm) * 0.5);
+    color: var(--gold);
+  }
+  .wm-ring{
+    position:absolute; right:0; top:0;
+    width: var(--wm); height: var(--wm);
+    border-radius:50%; border: 1px solid var(--gold);
+    box-shadow: 0 0 0 3px var(--cream), 0 0 0 4px var(--gold-line);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap: calc(var(--wm) * 0.01);
+    padding: calc(var(--wm) * 0.05) calc(var(--wm) * 0.14);
+  }
+  .wm-dot{
+    position:absolute; width: calc(var(--wm) * 0.024); height: calc(var(--wm) * 0.024);
+    border-radius:50%; background: var(--gold); transform:translate(-50%,-50%);
+  }
+  .wm-ornament{ width: calc(var(--wm) * 0.15); height: calc(var(--wm) * 0.15); color: var(--gold); }
+  .wm-ornament svg{ width:100%; height:100%; }
+
+  .wm-monogram{ position:relative; height: calc(var(--wm) * 0.29); width:100%; }
+  .wm-k, .wm-p{
+    position:absolute; top:50%;
+    font-family:'Playfair Display', serif; font-weight:900; color: var(--gold);
+    font-size: calc(var(--wm) * 0.29); line-height:1;
+  }
+  .wm-k{ left: 26%; transform: translate(-50%,-55%); }
+  .wm-p{ right: 26%; transform: translate(50%,-55%); }
+  .wm-weds-script{
+    position:absolute; left:50%; top:66%; transform: translate(-50%,-50%);
+    font-family:'Great Vibes', cursive; color: var(--maroon-deep);
+    font-size: calc(var(--wm) * 0.125); white-space:nowrap; line-height:1;
+  }
+  .wm-weds-script::before{
+    content:"\2661"; position:absolute; left:50%; top:-72%; transform:translateX(-50%);
+    font-size: calc(var(--wm) * 0.06); color: var(--maroon-deep); line-height:1;
+  }
+
+  .wm-names{
+    font-family:'Playfair Display', serif; font-weight:700; color: var(--maroon-deep);
+    font-size: calc(var(--wm) * 0.06); letter-spacing: 0.06em; text-transform:uppercase;
+    text-align:center; line-height:1.2; margin:0;
+  }
+  .wm-names .weds{
+    display:flex; align-items:center; justify-content:center; gap: calc(var(--wm) * 0.02);
+    font-family:'Great Vibes', cursive; font-weight:400; color: var(--gold);
+    text-transform:none; letter-spacing:0; font-size: calc(var(--wm) * 0.1); line-height:1.3;
+  }
+  .wm-names .weds .dash{ width: calc(var(--wm) * 0.045); height:1px; background: var(--gold-line); }
+
+  .wm-divider{ display:flex; align-items:center; gap: calc(var(--wm) * 0.02); color: var(--gold); line-height:1; }
+  .wm-divider .line{ width: calc(var(--wm) * 0.06); height:1px; background: var(--gold-line); }
+  .wm-divider svg{ width: calc(var(--wm) * 0.06); height: calc(var(--wm) * 0.06); }
+
+  .wm-tagline{
+    display:flex; align-items:center; gap: calc(var(--wm) * 0.025);
+    font-family:'Cinzel', serif; font-weight:600; color: var(--gold);
+    font-size: calc(var(--wm) * 0.04); letter-spacing: 0.09em; text-transform:uppercase;
+    line-height:1; white-space:nowrap;
+  }
+  .wm-tagline .dot{ width: calc(var(--wm) * 0.013); height: calc(var(--wm) * 0.013); border-radius:50%; background:currentColor; }
+  .wm-heart{ color: var(--maroon-deep); font-size: calc(var(--wm) * 0.045); line-height:1; }
 
   /* ---------- reveal-on-scroll ---------- */
   .reveal{ opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .reveal.in{ opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
-  /* ---------- nav (burgundy background removed entirely — cream, matching the page) ---------- */
+  /* ---------- nav (burgundy background removed — cream, sticky; logo lives in the hero instead) ---------- */
   .nav{
     position: sticky; top:0; z-index: 30;
-    display:flex; align-items:center; justify-content:space-between;
-    gap: 16px;
+    display:flex; align-items:center; justify-content:flex-end;
     padding: 10px 20px;
     background: var(--cream);
     border-bottom: 1px solid rgba(184,134,58,0.35);
   }
-
-  /* ---------- brand monogram (real vector type, not a pasted image) ---------- */
-  .brand-mark-wrap{
-    --mark: 128px;
-    flex:none; position:relative;
-    width: calc(var(--mark) * 1.3); height: var(--mark);
-  }
-  .mark-lotus{
-    position:absolute; left:0; bottom: calc(var(--mark) * -0.02);
-    width: calc(var(--mark) * 0.5); height: calc(var(--mark) * 0.5);
-    color: var(--gold); z-index:2; pointer-events:none;
-  }
-  .brand-mark{
-    position:absolute; right:0; top:0;
-    width: var(--mark); height: var(--mark);
-    border-radius:50%;
-    border: 1px solid var(--gold);
-    box-shadow: 0 0 0 3px var(--cream), 0 0 0 4px var(--gold-line);
-    background: radial-gradient(circle at 50% 38%, rgba(184,134,58,0.08), transparent 65%);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap: calc(var(--mark) * 0.01);
-    padding: calc(var(--mark) * 0.05) calc(var(--mark) * 0.13);
-    z-index:1;
-  }
-  .ring-dot{
-    position:absolute; width: calc(var(--mark) * 0.028); height: calc(var(--mark) * 0.028);
-    border-radius:50%; background: var(--gold); transform:translate(-50%,-50%);
-  }
-
-  .mark-ornament{ position:relative; width: calc(var(--mark) * 0.16); height: calc(var(--mark) * 0.16); color: var(--gold); }
-  .mark-ornament svg{ width:100%; height:100%; }
-
-  .mark-monogram{ position:relative; height: calc(var(--mark) * 0.3); width:100%; }
-  .mark-k, .mark-p{
-    position:absolute; top:50%;
-    font-family:'Playfair Display', serif; font-weight:900;
-    background: linear-gradient(160deg, var(--gold-soft), var(--gold) 55%, var(--gold-line));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    font-size: calc(var(--mark) * 0.3); line-height:1;
-  }
-  .mark-k{ left: 26%; transform: translate(-50%,-55%); }
-  .mark-p{ right: 26%; transform: translate(50%,-55%); }
-  .mark-weds-script{
-    position:absolute; left:50%; top:66%; transform: translate(-50%,-50%);
-    font-family:'Great Vibes', cursive; color: var(--maroon-deep);
-    font-size: calc(var(--mark) * 0.13); white-space:nowrap; line-height:1;
-  }
-  .mark-weds-script::before{
-    content:"\2661"; position:absolute; left:50%; top:-72%; transform:translateX(-50%);
-    font-size: calc(var(--mark) * 0.06); color: var(--maroon-deep); line-height:1;
-  }
-
-  .mark-names{
-    font-family:'Playfair Display', serif; font-weight:700; color: var(--maroon-deep);
-    font-size: calc(var(--mark) * 0.062); letter-spacing: 0.06em; text-transform:uppercase;
-    text-align:center; line-height:1.2; margin: 0;
-  }
-  .mark-names .weds{
-    display:flex; align-items:center; justify-content:center; gap: calc(var(--mark) * 0.02);
-    font-family:'Great Vibes', cursive; font-weight:400; color: var(--gold);
-    text-transform:none; letter-spacing:0; font-size: calc(var(--mark) * 0.1); line-height:1.3;
-  }
-  .mark-names .weds .dash{ width: calc(var(--mark) * 0.045); height:1px; background: var(--gold-line); }
-
-  .mark-divider{ display:flex; align-items:center; gap: calc(var(--mark) * 0.02); color: var(--gold); line-height:1; }
-  .mark-divider .line{ width: calc(var(--mark) * 0.06); height:1px; background: var(--gold-line); }
-  .mark-divider svg{ width: calc(var(--mark) * 0.06); height: calc(var(--mark) * 0.06); }
-
-  .mark-tagline{
-    display:flex; align-items:center; gap: calc(var(--mark) * 0.025);
-    font-family:'Cinzel', serif; font-weight:600; color: var(--gold);
-    font-size: calc(var(--mark) * 0.042); letter-spacing: 0.09em; text-transform:uppercase;
-    line-height:1; white-space:nowrap;
-  }
-  .mark-tagline .dot{ width: calc(var(--mark) * 0.014); height: calc(var(--mark) * 0.014); border-radius:50%; background:currentColor; }
-  .mark-heart{ color: var(--maroon-deep); font-size: calc(var(--mark) * 0.048); line-height:1; }
 
   .music-toggle{
     flex:none; width:30px; height:30px; border-radius:50%;
@@ -552,7 +547,7 @@
   footer{
     background: var(--noir); color: var(--cream);
     text-align:center; padding: 56px 20px 26px;
-    position:relative; overflow:hidden;
+    position:relative; z-index:2; overflow:hidden;
   }
   .footer-inner{ position:relative; z-index:1; }
   .thanks{ font-family:'Playfair Display', serif; font-style:italic; font-size:1.2rem; max-width: 30ch; margin: 0 auto 16px; color: #F1E4CE; }
@@ -560,7 +555,6 @@
   .foot-flourish{ margin-top: 30px; color: var(--gold); opacity:0.8; }
   .foot-flourish svg{ width:26px; height:26px; animation: heartbeat 3.4s ease-in-out infinite; transform-origin:center; }
 
-  @media (min-width: 700px){ .brand-mark-wrap{ --mark: 148px; } }
 
   /* Telugu script needs its own face — the Latin display fonts above have no Telugu glyphs.
      !important is deliberate: this must win over every component's own font-family, regardless
@@ -628,8 +622,6 @@
   .invite-card .card-corner.tl{ top:10px; left:10px; }
   .invite-card .card-corner.tr{ top:10px; right:10px; transform:scaleX(-1); }
 
-  .card-kicker{ font-family:'Playfair Display',serif; font-weight:700; color:var(--paper); font-size:0.82rem; margin:0; }
-  .card-kicker span{ display:block; font-family:'Poppins',sans-serif; font-weight:500; font-size:0.5rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-soft); margin-top:3px; }
   .card-welcome-lead{ font-family:'Playfair Display',serif; color:var(--gold-soft); font-size: clamp(0.85rem,4vw,1rem); margin: 12px 0 0; }
   .card-welcome-big{ font-family:'Playfair Display',serif; font-weight:900; color:var(--gold-soft); font-size: clamp(1.5rem,7vw,2rem); margin:0 0 6px; line-height:1.05; }
   .card-eyebrow{ font-family:'Cinzel',serif; font-weight:600; font-size:0.5rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin: 8px 0; }
@@ -695,14 +687,14 @@
     <path d="M2 20 C 2 24, 6 24, 6 20" stroke-width="0.7" opacity="0.7"/>
     <circle cx="18" cy="2" r="1.4" fill="currentColor" stroke="none"/>
   </symbol>
-  <symbol id="mark-crown" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+  <symbol id="wm-crown" viewBox="0 0 40 40" fill="none" stroke="currentColor">
     <path d="M20 2 L23 12 L20 18 L17 12 Z" fill="currentColor" stroke="none"/>
     <circle cx="6" cy="20" r="2" fill="currentColor" stroke="none"/>
     <circle cx="34" cy="20" r="2" fill="currentColor" stroke="none"/>
     <path d="M9 20 C 14 16, 18 16, 20 12" stroke-width="1.2"/>
     <path d="M31 20 C 26 16, 22 16, 20 12" stroke-width="1.2"/>
   </symbol>
-  <symbol id="lotus-motif" viewBox="0 0 100 100">
+  <symbol id="wm-lotus" viewBox="0 0 100 100">
     <path d="M72 14 C 54 26, 42 46, 38 74" fill="none" stroke="var(--gold-line)" stroke-width="2"/>
     <path d="M64 24 C 57 17, 47 18, 43 26 C 50 30, 59 30, 64 24 Z" fill="var(--gold)"/>
     <path d="M53 42 C 45 36, 35 38, 31 47 C 39 51, 49 49, 53 42 Z" fill="var(--gold)"/>
@@ -717,6 +709,41 @@
     </g>
   </symbol>
 </svg>
+
+<div class="watermark" aria-hidden="true">
+  <svg class="wm-lotus" viewBox="0 0 100 100"><use href="#wm-lotus"/></svg>
+  <div class="wm-ring">
+    <span class="wm-dot" style="left:73%; top:10.2%;"></span>
+    <span class="wm-dot" style="left:96%; top:50%;"></span>
+    <span class="wm-dot" style="left:73%; top:89.8%;"></span>
+    <span class="wm-dot" style="left:27%; top:89.8%;"></span>
+    <span class="wm-dot" style="left:4%; top:50%;"></span>
+    <span class="wm-dot" style="left:27%; top:10.2%;"></span>
+
+    <div class="wm-ornament"><svg viewBox="0 0 40 40"><use href="#wm-crown"/></svg></div>
+
+    <div class="wm-monogram">
+      <span class="wm-k">K</span>
+      <span class="wm-weds-script">weds</span>
+      <span class="wm-p">P</span>
+    </div>
+
+    <p class="wm-names">
+      Krishna
+      <span class="weds"><span class="dash"></span>weds<span class="dash"></span></span>
+      Prasanna
+    </p>
+
+    <div class="wm-divider">
+      <span class="line"></span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="6" r="3.4"/><circle cx="12" cy="18" r="3.4"/><circle cx="6" cy="12" r="3.4"/><circle cx="18" cy="12" r="3.4"/></svg>
+      <span class="line"></span>
+    </div>
+
+    <p class="wm-tagline"><span class="dot"></span>Together Forever<span class="dot"></span></p>
+    <span class="wm-heart">&hearts;</span>
+  </div>
+</div>
 
 <div class="gate" id="gate" role="dialog" aria-label="Wedding invitation opener">
   <div class="lang-toggle on-cream" style="position:absolute; top:16px; left:18px; z-index:3;" data-lang-toggle>
@@ -749,9 +776,7 @@
         <svg class="card-corner tl"><use href="#card-corner"/></svg>
         <svg class="card-corner tr"><use href="#card-corner"/></svg>
 
-        <p class="card-kicker" data-i18n="gate.cardKicker">Shetty&rsquo;s Family<span>Wedding Invitation</span></p>
-
-        <div class="flourish" style="margin:10px 0 4px;"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="flourish" style="margin:4px 0 4px;"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"/></svg></div>
 
         <p class="card-welcome-lead" data-i18n="hero.welcomeLead">Shetty Family</p>
         <p class="card-welcome-big" data-i18n="hero.welcomeBig">Welcomes You</p>
@@ -789,40 +814,6 @@
 </div>
 
 <nav class="nav">
-  <div class="brand-mark-wrap">
-    <svg class="mark-lotus" viewBox="0 0 100 100"><use href="#lotus-motif"/></svg>
-    <div class="brand-mark" role="img" aria-label="Krishna weds Prasanna, Together Forever">
-      <span class="ring-dot" style="left:73%; top:10.2%;"></span>
-      <span class="ring-dot" style="left:96%; top:50%;"></span>
-      <span class="ring-dot" style="left:73%; top:89.8%;"></span>
-      <span class="ring-dot" style="left:27%; top:89.8%;"></span>
-      <span class="ring-dot" style="left:4%; top:50%;"></span>
-      <span class="ring-dot" style="left:27%; top:10.2%;"></span>
-
-      <div class="mark-ornament"><svg viewBox="0 0 40 40"><use href="#mark-crown"/></svg></div>
-
-      <div class="mark-monogram">
-        <span class="mark-k">K</span>
-        <span class="mark-weds-script">weds</span>
-        <span class="mark-p">P</span>
-      </div>
-
-      <p class="mark-names">
-        Krishna
-        <span class="weds"><span class="dash"></span>weds<span class="dash"></span></span>
-        Prasanna
-      </p>
-
-      <div class="mark-divider">
-        <span class="line"></span>
-        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="6" r="3.4"/><circle cx="12" cy="18" r="3.4"/><circle cx="6" cy="12" r="3.4"/><circle cx="18" cy="12" r="3.4"/></svg>
-        <span class="line"></span>
-      </div>
-
-      <p class="mark-tagline"><span class="dot"></span>Together Forever<span class="dot"></span></p>
-      <span class="mark-heart">&hearts;</span>
-    </div>
-  </div>
   <div class="lang-toggle on-cream" data-lang-toggle>
     <button type="button" data-lang-btn="en">EN</button>
     <button type="button" data-lang-btn="te">తె</button>
@@ -1085,7 +1076,6 @@
       "gate.hint1.text": "Tap anywhere<br/>on the card",
       "gate.hint2.num": "2. Pull",
       "gate.hint2.text": "Pull the card<br/>downwards",
-      "gate.cardKicker": "Shetty&rsquo;s Family<span>Wedding Invitation</span>",
       "gate.cta": "Press or Pull<span>to open the invitation</span>",
       "brand.kicker": "Shetty&rsquo;s Family",
       "nav.kind": "Wedding Invitation",
@@ -1156,7 +1146,6 @@
       "gate.hint1.text": "కార్డుపై<br/>ఎక్కడైనా నొక్కండి",
       "gate.hint2.num": "2. లాగండి",
       "gate.hint2.text": "కార్డును<br/>కిందికి లాగండి",
-      "gate.cardKicker": "శెట్టి కుటుంబం<span>వివాహ ఆహ్వానం</span>",
       "gate.cta": "నొక్కండి లేదా లాగండి<span>ఆహ్వానం తెరవడానికి</span>",
       "brand.kicker": "శెట్టి కుటుంబం",
       "nav.kind": "వివాహ ఆహ్వానం",
