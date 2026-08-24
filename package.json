@@ -1,0 +1,16 @@
+{
+  "name": "hari-prasanna-wedding-invitation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Self-contained wedding invitation website for Hari Krishna & Gnana Prasanna Lakshmi.",
+  "scripts": {
+    "build": "node src/build.js",
+    "gen:qr:share": "node src/gen_qr_share.js",
+    "gen:qr:venues": "node src/gen_qr_venues.js"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4",
+    "jsqr": "^1.4.0",
+    "sharp": "^0.34.4"
+  }
+}
