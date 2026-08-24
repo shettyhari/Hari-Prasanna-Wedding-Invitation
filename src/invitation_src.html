@@ -429,12 +429,12 @@
   .venue-qr .qr-frame svg{ width: 84px; height:84px; display:block; }
   .venue-qr-caption{ margin-top: 6px; font-size: 0.7rem; color: var(--ink-soft); font-style:italic; }
 
-  .map-btn::after, .rsvp-submit::after, .live-btn::after{
+  .map-btn::after, .rsvp-call-btn::after, .live-btn::after{
     content:""; position:absolute; top:0; left:-60%; width:35%; height:100%;
     background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
     transform: skewX(-18deg); transition: left 0.65s ease; pointer-events:none;
   }
-  .map-btn:hover::after, .rsvp-submit:hover::after, .live-btn:hover::after{ left: 130%; }
+  .map-btn:hover::after, .rsvp-call-btn:hover::after, .live-btn:hover::after{ left: 130%; }
 
   /* ---------- watch live (dark bookend accent) ---------- */
   .live-card{
@@ -504,44 +504,34 @@
   }
   .toast.show{ opacity:1; transform: translate(-50%, 0); }
 
-  /* ---------- rsvp ---------- */
-  .rsvp-form{
-    display:flex; gap: 12px; margin-top: 26px; flex-wrap:wrap; justify-content:center;
+  /* ---------- rsvp (call to confirm) ---------- */
+  .rsvp-call{ text-align:center; margin-top: 26px; }
+  .rsvp-phone-icon{
+    width: 52px; height:52px; margin: 0 auto 16px;
+    border-radius:50%; border: 1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    background: var(--paper); color: var(--gold);
+    animation: iconFloat 4.6s ease-in-out infinite;
   }
-  .field{
-    position:relative; flex:1; min-width: 180px;
+  .rsvp-phone-icon svg{ width:22px; height:22px; }
+  .rsvp-phone-number{
+    font-family:'Playfair Display', serif; font-weight:700; color: var(--maroon-deep);
+    font-size: clamp(1.5rem, 6vw, 1.9rem); font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em; margin: 0 0 18px;
   }
-  .field svg{
-    position:absolute; left:14px; top:50%; transform:translateY(-50%);
-    width:16px; height:16px; color: var(--gold); pointer-events:none;
-  }
-  .field input{
-    width:100%; padding: 13px 14px 13px 40px;
-    border: 1px solid var(--gold-line); border-radius: 2px;
-    background: var(--paper); color: var(--ink);
-    font-family:'Cormorant Garamond', serif; font-size: 1.02rem;
-  }
-  .field input::placeholder{ color: var(--ink-soft); }
-  .field input:focus{ outline: 2px solid var(--gold); outline-offset:1px; }
-  .rsvp-submit{
+  .rsvp-call-btn{
     position:relative; overflow:hidden;
+    display:inline-flex; align-items:center; gap:10px;
     background: var(--maroon-deep); color: var(--paper);
     border: 1px solid var(--gold);
-    padding: 13px 26px; border-radius: 2px; cursor:pointer;
+    padding: 13px 28px; border-radius: 2px; text-decoration:none;
     font-family:'Poppins', sans-serif; font-weight:600;
-    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
     transition: filter 0.2s ease, transform 0.2s ease;
   }
-  .rsvp-submit:hover{ filter: brightness(1.15); transform: translateY(-1px); }
-  .rsvp-note{ text-align:center; color: var(--ink-soft); font-size: 0.85rem; font-style:italic; margin-top: 16px; }
-  .rsvp-thanks{
-    text-align:center; margin-top: 22px; padding: 18px; border: 1px solid var(--gold-line);
-    background: var(--paper); border-radius: 3px;
-    font-family:'Playfair Display', serif; font-style:italic; color: var(--maroon-deep); font-size:1.08rem;
-    display:none;
-  }
-  .rsvp-thanks.show{ display:block; animation: popIn 0.55s cubic-bezier(.2,.8,.3,1) both; }
-  @keyframes popIn{ from{ opacity:0; transform: scale(0.96) translateY(6px); } to{ opacity:1; transform:none; } }
+  .rsvp-call-btn:hover{ filter: brightness(1.15); transform: translateY(-1px); }
+  .rsvp-call-btn svg{ width:15px; height:15px; }
+  .rsvp-note{ text-align:center; color: var(--ink-soft); font-size: 0.85rem; font-style:italic; margin-top: 18px; }
 
   /* ---------- footer ---------- */
   footer{
@@ -1035,21 +1025,17 @@
     <h2 class="heading" data-i18n="rsvp.heading">RSVP</h2>
     <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
 
-    <form class="rsvp-form" id="rsvp-form">
-      <div class="field">
-        <label for="rsvp-name" class="visually-hidden" data-i18n="rsvp.nameLabel">Your Name</label>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-        <input type="text" id="rsvp-name" placeholder="Your Name" data-i18n-ph="rsvp.nameLabel" required autocomplete="name" />
+    <div class="rsvp-call">
+      <div class="rsvp-phone-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       </div>
-      <div class="field">
-        <label for="rsvp-guests" class="visually-hidden" data-i18n="rsvp.guestsLabel">Total Guests</label>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.2"/><path d="M15 20c0-2.4 1.6-4.4 3.6-5"/></svg>
-        <input type="number" inputmode="numeric" id="rsvp-guests" placeholder="Total Guests" data-i18n-ph="rsvp.guestsLabel" min="1" max="50" required />
-      </div>
-      <button type="submit" class="rsvp-submit" data-i18n="rsvp.submit">Confirm RSVP</button>
-    </form>
-    <p class="rsvp-note" data-i18n="rsvp.note">Kindly confirm at your earliest convenience</p>
-    <p class="rsvp-thanks" id="rsvp-thanks"></p>
+      <p class="rsvp-phone-number">+91 99891 70703</p>
+      <a class="rsvp-call-btn" href="tel:+919989170703">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <span data-i18n="rsvp.callBtn">Call to RSVP</span>
+      </a>
+    </div>
+    <p class="rsvp-note" data-i18n="rsvp.note">Kindly confirm your attendance by phone</p>
   </div>
 </section>
 
@@ -1131,10 +1117,8 @@
       "share.qrCaption": "Scan to open this invite",
       "share.button": "Share This Invite",
       "rsvp.heading": "RSVP",
-      "rsvp.nameLabel": "Your Name",
-      "rsvp.guestsLabel": "Total Guests",
-      "rsvp.submit": "Confirm RSVP",
-      "rsvp.note": "Kindly confirm at your earliest convenience",
+      "rsvp.callBtn": "Call to RSVP",
+      "rsvp.note": "Kindly confirm your attendance by phone",
       "footer.thanks": "We look forward to celebrating this special day with you.",
       "footer.love": "With Love,<br/>Shetty&rsquo;s Family"
     },
@@ -1201,10 +1185,8 @@
       "share.qrCaption": "ఈ ఆహ్వానాన్ని తెరవడానికి స్కాన్ చేయండి",
       "share.button": "ఈ ఆహ్వానాన్ని పంచుకోండి",
       "rsvp.heading": "హాజరు నిర్ధారణ",
-      "rsvp.nameLabel": "మీ పేరు",
-      "rsvp.guestsLabel": "మొత్తం అతిథులు",
-      "rsvp.submit": "నిర్ధారించండి",
-      "rsvp.note": "దయచేసి వీలైనంత త్వరగా నిర్ధారించండి",
+      "rsvp.callBtn": "కాల్ చేయండి",
+      "rsvp.note": "దయచేసి ఫోన్ ద్వారా మీ హాజరును నిర్ధారించండి",
       "footer.thanks": "ఈ ప్రత్యేక దినాన్ని మీతో కలిసి జరుపుకోవాలని ఎదురుచూస్తున్నాం.",
       "footer.love": "ప్రేమతో,<br/>శెట్టి కుటుంబం"
     }
@@ -1525,18 +1507,5 @@
     els.forEach(el => io.observe(el));
   })();
 
-  (function initRsvp(){
-    const form = document.getElementById("rsvp-form");
-    const thanks = document.getElementById("rsvp-thanks");
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      const name = document.getElementById("rsvp-name").value.trim();
-      const guests = document.getElementById("rsvp-guests").value;
-      thanks.textContent = currentLang === "te"
-        ? `ధన్యవాదాలు, ${name}! మీ హాజరు నిర్ధారణను ${guests} మంది అతిథుల కోసం నమోదు చేసుకున్నాము. మిమ్మల్ని కలవడానికి ఎదురుచూస్తున్నాము.`
-        : `Thank you, ${name}! We've noted your RSVP for ${guests} guest${guests == 1 ? "" : "s"}. We can't wait to celebrate with you.`;
-      thanks.classList.add("show");
-      form.reset();
-    });
-  })();
+
 </script>
