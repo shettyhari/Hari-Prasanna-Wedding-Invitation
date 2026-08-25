@@ -22,6 +22,8 @@
     --ink-soft: #6B5646;
     --rose: #E3AEB0;
     --rose-deep: #CE8A8E;
+    --teal: #1F6B5C;
+    --teal-deep: #14493F;
   }
 
   *{ box-sizing: border-box; }
@@ -250,6 +252,11 @@
   .corner-svg.br{ bottom:0; right:0; transform: scale(-1,-1); animation-delay: 4.5s; }
   @keyframes cornerBreathe{ 0%,100%{ opacity:0.68; } 50%{ opacity:0.95; } }
 
+  .palace-watermark{
+    position:absolute; left:0; right:0; bottom:0; width:100%; height:46%;
+    color: var(--gold-line); opacity:0.14; pointer-events:none;
+  }
+
   @keyframes iconFloat{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-5px); } }
   @keyframes heartbeat{
     0%,100%{ transform:scale(1); } 15%{ transform:scale(1.18); } 30%{ transform:scale(1); }
@@ -257,8 +264,11 @@
   }
 
   /* ---------- hero ---------- */
-  .hero{ padding: 56px 22px 60px; text-align:center; overflow:hidden; }
-  .hero-inner{ position:relative; z-index:1; max-width: 640px; margin:0 auto; }
+  .hero{ padding: 56px 22px 60px; text-align:center; overflow:hidden; position:relative; }
+  .hero::before, .hero::after{ content:""; position:absolute; border-radius:6px; pointer-events:none; z-index:1; }
+  .hero::before{ inset: 14px; border: 1px solid var(--gold); }
+  .hero::after{ inset: 19px; border: 1px solid var(--gold-line); border-radius:4px; }
+  .hero-inner{ position:relative; z-index:2; max-width: 640px; margin:0 auto; }
 
   @keyframes heroIn{ from{ opacity:0; transform: translateY(16px); } to{ opacity:1; transform:none; } }
   .hero-inner > *{ animation: heroIn 0.85s cubic-bezier(.2,.7,.3,1) both; }
@@ -675,14 +685,31 @@
       <path d="M62 54 C 56 46, 44 46, 38 54 C 44 58, 56 58, 62 54 Z"/>
     </g>
     <g transform="translate(88,86)">
-      <circle r="10" stroke-width="0.9" opacity="0.85"/>
-      <circle r="6.4" stroke-width="0.8" opacity="0.85"/>
-      <circle r="3" fill="currentColor" stroke="none" opacity="0.8"/>
+      <path d="M0,0 C -7,-3 -9,-10 -3,-15 C 2,-10 3,-4 0,0 Z" fill="var(--rose)" stroke="none" opacity="0.92"/>
+      <path d="M0,0 C 7,-3 9,-10 3,-15 C -2,-10 -3,-4 0,0 Z" fill="var(--rose-deep)" stroke="none" opacity="0.92"/>
+      <path d="M0,0 C -5,4 -11,3 -13,-4 C -7,-8 -3,-6 0,0 Z" fill="var(--rose)" stroke="none" opacity="0.85"/>
+      <path d="M0,0 C 5,4 11,3 13,-4 C 7,-8 3,-6 0,0 Z" fill="var(--rose-deep)" stroke="none" opacity="0.85"/>
+      <path d="M0,0 C -3,7 -3,13 3,15 C 6,9 4,3 0,0 Z" fill="var(--rose)" stroke="none" opacity="0.8"/>
+      <circle r="3" fill="var(--gold)" stroke="none"/>
       <path d="M-14 -3 C -18 -8, -18 -16, -12 -20" stroke-width="0.8" opacity="0.6"/>
       <path d="M3 13 C 6 18, 14 20, 20 16" stroke-width="0.8" opacity="0.6"/>
       <path d="M-10 10 C -14 16, -12 24, -6 28" stroke-width="0.7" opacity="0.5"/>
     </g>
+    <g transform="translate(56,72) rotate(-18) scale(0.55)">
+      <use href="#peacock-feather" width="24" height="24" x="-12" y="-12"/>
+    </g>
     <circle cx="50" cy="50" r="2" fill="currentColor" stroke="none" opacity="0.7"/>
+  </symbol>
+  <symbol id="peacock-feather" viewBox="0 0 24 24">
+    <path d="M12 2c3.2 2.2 4.3 6.4 2 9.6-1.1 1-2.9 1-4 0-2.3-3.2-1.2-7.4 2-9.6z" fill="var(--gold)"/>
+    <ellipse cx="12" cy="8.4" rx="3.3" ry="4.5" fill="var(--teal)"/>
+    <ellipse cx="12" cy="8.4" rx="1.5" ry="2.3" fill="var(--maroon-deep)"/>
+    <path d="M12 13v9" stroke="currentColor" stroke-width="1"/>
+    <path d="M12 15l-4-1.8M12 17l-4.3-1.4M12 19l-3.8-0.8" stroke="currentColor" stroke-width="0.6" opacity="0.55"/>
+    <path d="M12 15l4-1.8M12 17l4.3-1.4M12 19l3.8-0.8" stroke="currentColor" stroke-width="0.6" opacity="0.55"/>
+  </symbol>
+  <symbol id="palace-silhouette" viewBox="0 0 400 120" fill="currentColor">
+    <path d="M0,120 L0,80 20,80 20,58 30,58 30,44 Q30,30 45,30 Q60,30 60,44 L60,58 70,58 70,80 100,80 100,48 110,48 110,28 Q110,13 125,13 Q140,13 140,28 L140,48 150,48 150,80 180,80 180,63 190,63 190,48 Q190,33 205,33 Q220,33 220,48 L220,63 230,63 230,80 260,80 260,48 270,48 270,28 Q270,13 285,13 Q300,13 300,28 L300,48 310,48 310,80 340,80 340,58 350,58 350,44 Q350,30 365,30 Q380,30 380,44 L380,58 390,58 390,80 400,80 400,120 Z"/>
   </symbol>
   <symbol id="card-corner" viewBox="0 0 30 30" fill="none" stroke="currentColor">
     <path d="M2 14 V4 a2 2 0 0 1 2-2 H14" stroke-width="1.1"/>
@@ -748,6 +775,7 @@
 </div>
 
 <div class="gate" id="gate" role="dialog" aria-label="Wedding invitation opener">
+  <svg class="palace-watermark" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice"><use href="#palace-silhouette"/></svg>
   <div class="lang-toggle on-cream" style="position:absolute; top:16px; left:18px; z-index:3;" data-lang-toggle>
     <button type="button" data-lang-btn="en">EN</button>
     <button type="button" data-lang-btn="te">తె</button>
@@ -763,7 +791,7 @@
     <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2.6"/></svg></div>
     <p class="gate-eyebrow" data-i18n="gate.eyebrow">You&rsquo;re Invited</p>
     <p class="gate-sub" data-i18n="gate.sub">to a celebration of love, family &amp; togetherness</p>
-    <div class="flourish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
   </div>
 
   <div class="gate-stage">
@@ -826,6 +854,7 @@
 </nav>
 
 <section class="hero band-cream" id="top">
+  <svg class="palace-watermark" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice"><use href="#palace-silhouette"/></svg>
   <svg class="corner-svg tl"><use href="#corner-motif"/></svg>
   <svg class="corner-svg tr"><use href="#corner-motif"/></svg>
   <svg class="corner-svg bl"><use href="#corner-motif"/></svg>
@@ -835,7 +864,7 @@
     <p class="welcome-lead" data-i18n="hero.welcomeLead">Shetty Family</p>
     <h1 class="welcome-big" data-i18n="hero.welcomeBig">Welcomes You</h1>
 
-    <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
 
     <p class="eyebrow" data-i18n="hero.eyebrow">Together With Their Families</p>
 
@@ -874,7 +903,7 @@
     </div>
 
     <div id="cd-done" class="happening-badge" hidden>
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:30px;height:30px;color:var(--gold);"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg>
+      <svg viewBox="0 0 24 24" style="width:30px;height:30px;"><use href="#peacock-feather"/></svg>
       <p class="heading" style="margin-top:12px;" data-i18n="cd.doneHeading">Thank You for Celebrating With Us!</p>
     </div>
   </div>
@@ -883,7 +912,7 @@
 <section class="band-white reveal" style="padding: 56px 0;" id="families">
   <div class="wrap">
     <h2 class="heading" data-i18n="families.heading">Our Families</h2>
-    <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
 
     <div class="families-row">
       <div class="family-col">
@@ -894,7 +923,7 @@
 
       <div class="families-divider">
         <div class="line"></div>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg>
+        <svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg>
         <div class="line"></div>
       </div>
 
@@ -911,7 +940,7 @@
   <div class="wrap">
     <h2 class="heading" data-i18n="events.heading">Wedding Events</h2>
     <p class="sub" data-i18n="events.sub">Two celebrations, one beautiful beginning</p>
-    <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
 
     <div class="events-stack">
       <div class="event-item">
@@ -1686,7 +1715,7 @@
         </div>
       </div>
 
-      <div class="flourish" style="margin: 40px 0;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+      <div class="flourish" style="margin: 40px 0;"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
 
       <div class="event-item">
         <div class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V10l8-6 8 6v11M4 21h16M9 21v-6h6v6"/></svg></div>
@@ -2363,7 +2392,7 @@
   <div class="wrap-narrow">
     <p class="eyebrow" data-i18n="share.eyebrow">Spread the Word</p>
     <h2 class="heading" data-i18n="share.heading">Share the Celebration</h2>
-    <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
 
     <div class="share-wrap">
       <div class="qr-block">
@@ -3516,7 +3545,7 @@
 <section class="band-blush reveal" style="padding: 56px 0 64px;" id="rsvp">
   <div class="wrap-narrow">
     <h2 class="heading" data-i18n="rsvp.heading">RSVP</h2>
-    <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
 
     <div class="rsvp-call">
       <div class="rsvp-phone-icon">
@@ -3536,7 +3565,7 @@
   <div class="footer-inner">
     <p class="thanks" data-i18n="footer.thanks">We look forward to celebrating this special day with you.</p>
     <p class="families" data-i18n="footer.love">With Love,<br/>Shetty&rsquo;s Family</p>
-    <div class="foot-flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
+    <div class="foot-flourish"><svg viewBox="0 0 24 24"><use href="#peacock-feather"/></svg></div>
   </div>
 </footer>
 
