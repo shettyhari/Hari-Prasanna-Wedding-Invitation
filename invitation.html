@@ -257,15 +257,6 @@
     color: var(--gold-line); opacity:0.14; pointer-events:none;
   }
 
-  .side-peacock{
-    position:absolute; top:50%; width: clamp(110px, 16vw, 220px); height:auto;
-    color: var(--gold); opacity:0.85; pointer-events:none; z-index:0;
-    filter: drop-shadow(0 6px 10px rgba(92,20,32,0.10));
-  }
-  .side-peacock.left{ left: clamp(-30px, -1vw, 10px); transform: translateY(-50%); }
-  .side-peacock.right{ right: clamp(-30px, -1vw, 10px); transform: translateY(-50%) scaleX(-1); }
-  @media (max-width: 640px){ .side-peacock{ width: clamp(70px, 24vw, 120px); opacity:0.7; } }
-
   @keyframes iconFloat{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-5px); } }
   @keyframes heartbeat{
     0%,100%{ transform:scale(1); } 15%{ transform:scale(1.18); } 30%{ transform:scale(1); }
@@ -717,22 +708,6 @@
     <path d="M12 15l-4-1.8M12 17l-4.3-1.4M12 19l-3.8-0.8" stroke="currentColor" stroke-width="0.6" opacity="0.55"/>
     <path d="M12 15l4-1.8M12 17l4.3-1.4M12 19l3.8-0.8" stroke="currentColor" stroke-width="0.6" opacity="0.55"/>
   </symbol>
-  <symbol id="peacock-bird" viewBox="0 0 200 220">
-    <use href="#peacock-feather" x="87" y="83" width="26" height="62" transform="rotate(-65 100 145)"/>
-    <use href="#peacock-feather" x="87" y="71" width="26" height="74" transform="rotate(-43 100 145)"/>
-    <use href="#peacock-feather" x="87" y="61" width="26" height="84" transform="rotate(-21 100 145)"/>
-    <use href="#peacock-feather" x="87" y="55" width="26" height="90" transform="rotate(0 100 145)"/>
-    <use href="#peacock-feather" x="87" y="61" width="26" height="84" transform="rotate(21 100 145)"/>
-    <use href="#peacock-feather" x="87" y="71" width="26" height="74" transform="rotate(43 100 145)"/>
-    <use href="#peacock-feather" x="87" y="83" width="26" height="62" transform="rotate(65 100 145)"/>
-    <ellipse cx="100" cy="158" rx="17" ry="25" fill="var(--teal-deep)"/>
-    <path d="M93 138 C 87 122, 91 106, 82 94" stroke="var(--teal-deep)" stroke-width="11" fill="none" stroke-linecap="round"/>
-    <circle cx="80" cy="88" r="9" fill="var(--teal-deep)"/>
-    <path d="M80 79 L77 69M80 79 L81 68M80 79 L85 71" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-    <path d="M72 89 L60 86" stroke="var(--teal-deep)" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="83" cy="85" r="1.3" fill="var(--gold)"/>
-    <path d="M92 172 L87 195M108 172 L113 195" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"/>
-  </symbol>
   <symbol id="palace-silhouette" viewBox="0 0 400 120" fill="currentColor">
     <path d="M0,120 L0,80 20,80 20,58 30,58 30,44 Q30,30 45,30 Q60,30 60,44 L60,58 70,58 70,80 100,80 100,48 110,48 110,28 Q110,13 125,13 Q140,13 140,28 L140,48 150,48 150,80 180,80 180,63 190,63 190,48 Q190,33 205,33 Q220,33 220,48 L220,63 230,63 230,80 260,80 260,48 270,48 270,28 Q270,13 285,13 Q300,13 300,28 L300,48 310,48 310,80 340,80 340,58 350,58 350,44 Q350,30 365,30 Q380,30 380,44 L380,58 390,58 390,80 400,80 400,120 Z"/>
   </symbol>
@@ -801,8 +776,6 @@
 
 <div class="gate" id="gate" role="dialog" aria-label="Wedding invitation opener">
   <svg class="palace-watermark" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice"><use href="#palace-silhouette"/></svg>
-  <svg class="side-peacock left" viewBox="0 0 200 220"><use href="#peacock-bird"/></svg>
-  <svg class="side-peacock right" viewBox="0 0 200 220"><use href="#peacock-bird"/></svg>
   <div class="lang-toggle on-cream" style="position:absolute; top:16px; left:18px; z-index:3;" data-lang-toggle>
     <button type="button" data-lang-btn="en">EN</button>
     <button type="button" data-lang-btn="te">తె</button>
@@ -882,8 +855,6 @@
 
 <section class="hero band-cream" id="top">
   <svg class="palace-watermark" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice"><use href="#palace-silhouette"/></svg>
-  <svg class="side-peacock left" viewBox="0 0 200 220"><use href="#peacock-bird"/></svg>
-  <svg class="side-peacock right" viewBox="0 0 200 220"><use href="#peacock-bird"/></svg>
   <svg class="corner-svg tl"><use href="#corner-motif"/></svg>
   <svg class="corner-svg tr"><use href="#corner-motif"/></svg>
   <svg class="corner-svg bl"><use href="#corner-motif"/></svg>
@@ -975,7 +946,7 @@
       <div class="event-item">
         <div class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2c2 3 2 5 0 7-2-2-2-4 0-7z"/><path d="M12 9v13M6 22h12M8 15c-3 0-4-2-4-4 3 0 4 1 4 4zM16 15c3 0 4-2 4-4-3 0-4 1-4 4z"/></svg></div>
         <p class="event-name" data-i18n="events.muhurtham.name">Muhurtham</p>
-        <p class="event-date" data-i18n="events.muhurtham.date">Wed, 26 Aug 2026</p>
+        <p class="event-date">Wed, 26 Aug 2026</p>
         <p class="event-time" data-i18n="events.muhurtham.time">11:45 PM &middot; Vrushabha Lagnam</p>
         <p class="event-extra" data-i18n="events.muhurtham.extra">Dinner from 8:00 PM</p>
         <a class="add-cal" target="_blank" rel="noopener"
@@ -1749,7 +1720,7 @@
       <div class="event-item">
         <div class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V10l8-6 8 6v11M4 21h16M9 21v-6h6v6"/></svg></div>
         <p class="event-name" data-i18n="events.reception.name">Reception</p>
-        <p class="event-date" data-i18n="events.reception.date">Sun, 30 Aug 2026</p>
+        <p class="event-date">Sun, 30 Aug 2026</p>
         <p class="event-time" data-i18n="events.reception.time">From 5:00 PM</p>
         <p class="event-extra" data-i18n="events.reception.extra">Dinner from 6:00 PM</p>
         <a class="add-cal" target="_blank" rel="noopener"
@@ -3643,11 +3614,9 @@
       "events.heading": "Wedding Events",
       "events.sub": "Two celebrations, one beautiful beginning",
       "events.muhurtham.name": "Muhurtham",
-      "events.muhurtham.date": "Wed, 26 Aug 2026",
       "events.muhurtham.time": "11:45 PM &middot; Vrushabha Lagnam",
       "events.muhurtham.extra": "Dinner from 8:00 PM",
       "events.reception.name": "Reception",
-      "events.reception.date": "Sun, 30 Aug 2026",
       "events.reception.time": "From 5:00 PM",
       "events.reception.extra": "Dinner from 6:00 PM",
       "events.addToCalendar": "Add to Calendar",
@@ -3713,11 +3682,9 @@
       "events.heading": "వివాహ వేడుకలు",
       "events.sub": "రెండు వేడుకలు, ఒక అందమైన ఆరంభం",
       "events.muhurtham.name": "ముహూర్తం",
-      "events.muhurtham.date": "బుధవారం, 26 ఆగస్టు 2026",
       "events.muhurtham.time": "రాత్రి 11:45 &middot; వృషభ లగ్నం",
       "events.muhurtham.extra": "రాత్రి 8:00 నుండి భోజనం",
       "events.reception.name": "రిసెప్షన్",
-      "events.reception.date": "ఆదివారం, 30 ఆగస్టు 2026",
       "events.reception.time": "సాయంత్రం 5:00 నుండి",
       "events.reception.extra": "సాయంత్రం 6:00 నుండి భోజనం",
       "events.addToCalendar": "క్యాలెండర్‌కు జోడించండి",
