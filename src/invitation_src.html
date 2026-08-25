@@ -174,7 +174,7 @@
   .reveal.in{ opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
 
-  /* ---------- nav (burgundy background removed — cream, sticky; logo lives in the hero instead) ---------- */
+  /* ---------- nav (burgundy background removed — cream, sticky; logo lives in the fixed watermark instead) ---------- */
   .nav{
     position: sticky; top:0; z-index: 30;
     display:flex; align-items:center; justify-content:flex-end;
@@ -946,7 +946,7 @@
       <div class="event-item">
         <div class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2c2 3 2 5 0 7-2-2-2-4 0-7z"/><path d="M12 9v13M6 22h12M8 15c-3 0-4-2-4-4 3 0 4 1 4 4zM16 15c3 0 4-2 4-4-3 0-4 1-4 4z"/></svg></div>
         <p class="event-name" data-i18n="events.muhurtham.name">Muhurtham</p>
-        <p class="event-date">Wed, 26 Aug 2026</p>
+        <p class="event-date" data-i18n="events.muhurtham.date">Wed, 26 Aug 2026</p>
         <p class="event-time" data-i18n="events.muhurtham.time">11:45 PM &middot; Vrushabha Lagnam</p>
         <p class="event-extra" data-i18n="events.muhurtham.extra">Dinner from 8:00 PM</p>
         <a class="add-cal" target="_blank" rel="noopener"
@@ -981,7 +981,7 @@
       <div class="event-item">
         <div class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V10l8-6 8 6v11M4 21h16M9 21v-6h6v6"/></svg></div>
         <p class="event-name" data-i18n="events.reception.name">Reception</p>
-        <p class="event-date">Sun, 30 Aug 2026</p>
+        <p class="event-date" data-i18n="events.reception.date">Sun, 30 Aug 2026</p>
         <p class="event-time" data-i18n="events.reception.time">From 5:00 PM</p>
         <p class="event-extra" data-i18n="events.reception.extra">Dinner from 6:00 PM</p>
         <a class="add-cal" target="_blank" rel="noopener"
@@ -1104,12 +1104,6 @@
       "gate.hint2.num": "2. Pull",
       "gate.hint2.text": "Pull the card<br/>downwards",
       "gate.cta": "Press or Pull<span>to open the invitation</span>",
-      "brand.kicker": "Shetty&rsquo;s Family",
-      "nav.kind": "Wedding Invitation",
-      "nav.home": "Home",
-      "nav.family": "Our Family",
-      "nav.events": "Events",
-      "nav.rsvp": "RSVP",
       "hero.welcomeLead": "Shetty Family",
       "hero.welcomeBig": "Welcomes You",
       "hero.eyebrow": "Together With Their Families",
@@ -1133,16 +1127,17 @@
       "events.heading": "Wedding Events",
       "events.sub": "Two celebrations, one beautiful beginning",
       "events.muhurtham.name": "Muhurtham",
+      "events.muhurtham.date": "Wed, 26 Aug 2026",
       "events.muhurtham.time": "11:45 PM &middot; Vrushabha Lagnam",
       "events.muhurtham.extra": "Dinner from 8:00 PM",
       "events.reception.name": "Reception",
+      "events.reception.date": "Sun, 30 Aug 2026",
       "events.reception.time": "From 5:00 PM",
       "events.reception.extra": "Dinner from 6:00 PM",
       "events.addToCalendar": "Add to Calendar",
       "moments.eyebrow": "A Glimpse",
       "moments.heading": "Our Moments",
       "moments.caption": "Hari &amp; Prasanna",
-      "location.heading": "Our Location",
       "location.muhurthamLabel": "Muhurtham Venue",
       "location.receptionLabel": "Reception Venue",
       "location.viewOnMap": "View on Map",
@@ -1172,12 +1167,6 @@
       "gate.hint2.num": "2. లాగండి",
       "gate.hint2.text": "కార్డును<br/>కిందికి లాగండి",
       "gate.cta": "నొక్కండి లేదా లాగండి<span>ఆహ్వానం తెరవడానికి</span>",
-      "brand.kicker": "శెట్టి కుటుంబం",
-      "nav.kind": "వివాహ ఆహ్వానం",
-      "nav.home": "హోమ్",
-      "nav.family": "మా కుటుంబం",
-      "nav.events": "వేడుకలు",
-      "nav.rsvp": "RSVP",
       "hero.welcomeLead": "శెట్టి కుటుంబం",
       "hero.welcomeBig": "మిమ్మల్ని ఆహ్వానిస్తోంది",
       "hero.eyebrow": "ఇరు కుటుంబాల సమక్షంలో",
@@ -1201,16 +1190,17 @@
       "events.heading": "వివాహ వేడుకలు",
       "events.sub": "రెండు వేడుకలు, ఒక అందమైన ఆరంభం",
       "events.muhurtham.name": "ముహూర్తం",
+      "events.muhurtham.date": "బుధవారం, 26 ఆగస్టు 2026",
       "events.muhurtham.time": "రాత్రి 11:45 &middot; వృషభ లగ్నం",
       "events.muhurtham.extra": "రాత్రి 8:00 నుండి భోజనం",
       "events.reception.name": "రిసెప్షన్",
+      "events.reception.date": "ఆదివారం, 30 ఆగస్టు 2026",
       "events.reception.time": "సాయంత్రం 5:00 నుండి",
       "events.reception.extra": "సాయంత్రం 6:00 నుండి భోజనం",
       "events.addToCalendar": "క్యాలెండర్‌కు జోడించండి",
       "moments.eyebrow": "ఒక చిన్న వీక్షణ",
       "moments.heading": "మా అపురూప క్షణాలు",
       "moments.caption": "హరి &amp; ప్రసన్న",
-      "location.heading": "మా ప్రదేశం",
       "location.muhurthamLabel": "ముహూర్తం స్థలం",
       "location.receptionLabel": "రిసెప్షన్ స్థలం",
       "location.viewOnMap": "మ్యాప్‌లో చూడండి",
