@@ -358,6 +358,18 @@
 
   /* ---------- events (each event carries its own venue) ---------- */
   .events-stack{ margin-top: 30px; }
+  @media (min-width: 760px){
+    .events-stack{
+      display:flex; align-items:flex-start; gap: 40px; position:relative;
+    }
+    .events-stack > .event-item{ flex:1; min-width:0; }
+    .events-stack > .flourish{ display:none; }
+    .events-stack::before{
+      content:""; position:absolute; left:50%; top:6px; bottom:6px; width:1px;
+      background: linear-gradient(var(--gold-line), var(--gold), var(--gold-line));
+      opacity:0.55;
+    }
+  }
   .event-item{ text-align:center; }
   .event-icon{
     width: 68px; height:68px; margin: 0 auto 16px;
@@ -896,7 +908,7 @@
 </section>
 
 <section class="band-blush reveal" style="padding: 56px 0;" id="events">
-  <div class="wrap-narrow">
+  <div class="wrap">
     <h2 class="heading" data-i18n="events.heading">Wedding Events</h2>
     <p class="sub" data-i18n="events.sub">Two celebrations, one beautiful beginning</p>
     <div class="flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.6-9.5-9C.6 8.2 2 4 6 4c2.6 0 4.4 1.6 6 4 1.6-2.4 3.4-4 6-4 4 0 5.4 4.2 3.5 8-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
